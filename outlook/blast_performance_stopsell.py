@@ -1,8 +1,17 @@
 import os
-import pyautogui
+import sys
 from datetime import datetime, timedelta
-from general_task import *
+
+# Menyesuaikan path untuk mengimpor modul dari root directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
+import pyautogui
 from pynput.keyboard import Controller
+
+from general_task import *
 from screen_keeper import scanning_keeper, start_keeper, stop_keeper
 from services.check.capslock_checker import capslock_checking
 from services.check.chrome_checker import open_outlook
