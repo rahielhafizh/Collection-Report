@@ -74,7 +74,8 @@ def setup_logger() -> logging.Logger:
 
         if hasattr(stream_handler.stream, "reconfigure"):
             try:
-                stream_handler.stream.reconfigure(errors="replace")
+                # Perbaikan Pylance: Menggunakan getattr untuk menghindari error static type checking
+                getattr(stream_handler.stream, "reconfigure")(errors="replace")
             except Exception:
                 pass
         elif hasattr(stream_handler.stream, "buffer"):
@@ -113,39 +114,35 @@ APPLICATION_PATHS = {
     "OUTLOOK_PATH": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office\\Outlook 2013.lnk",
 }
 
-
 # ─── FOLDER PATHS ─────────────────────────────────────────────────────────────
 FOLDER_PATHS = {
-    "CEK-REPORT-FR": rf"D:\EL\REPORT_FLOWRATE\SUBMISSION\CEK-REPORT.xlsx",
     # SUBMISSION
-    "SUBMISSION_AR_TOD": rf"D:\EL\REPORT_AR_TOD\SUBMISSION",
-    "SUBMISSION_BUCKET_CURRENT": rf"D:\EL\REPORT_BUCKET_CURRENT\SUBMISSION",
-    "SUBMISSION_BUCKET_OD": rf"D:\EL\REPORT_BUCKET_OD\SUBMISSION",
-    "SUBMISSION_DASHBOARD_CWO": rf"D:\EL\SOURCE_DASHBOARD_CWO\SUBMISSION",
-    "SUBMISSION_RECOVERY_WO": rf"D:\EL\REPORT_RECOVERY_WO\SUBMISSION",
-    "SUBMISSION_FLOWRATE": rf"D:\EL\REPORT_FLOWRATE\SUBMISSION",
-    "SUBMISSION_LOR_MAIL": rf"D:\EL\SOURCE_MOBCOLL_LOR\EMAIL\SUBMISSION",
-    "SUBMISSION_LOR_WA": rf"D:\EL\SOURCE_MOBCOLL_LOR\WHATSAPP\SUBMISSION",
-    "SUBMISSION_MOBCOLL": rf"D:\EL\REPORT-MONITORING-MOBCOLL\SUBMISSION",
-    "SUBMISSION_PERFORMANCE": rf"D:\EL\REPORT_SUMMARY_PERFORMANCE\SUBMISSION",
-    "SUBMISSION_STOPSELL": rf"D:\EL\SOURCE_STOPSELL\SUBMISSION",
+    "SUBMISSION_AR_TOD": rf"C:\EL\Project\Standarized\Submission\Outlook\Performance_AR_TOD",
+    "SUBMISSION_BUCKET_CURRENT": rf"C:\EL\Project\Standarized\Submission\Outlook\Performance_Bucket_Current",
+    "SUBMISSION_BUCKET_OD": rf"C:\EL\Project\Standarized\Submission\Outlook\Performance_Bucket_Overdue",
+    "SUBMISSION_CASH_IN": rf"C:\EL\Project\Standarized\Submission\Outlook\Penerimaan_CashIn",
+    "SUBMISSION_DASHBOARD_CWO": rf"C:\EL\Project\Standarized\Submission\Outlook\Performance_CWO_WO_Estimasi_WO",
+    "SUBMISSION_DENDA_AKTIF": rf"C:\EL\Project\Standarized\Submission\Outlook\Penerimaan_Denda_Aktif",
+    "SUBMISSION_DENDA_ALDA": rf"C:\EL\Project\Standarized\Submission\Outlook\Penerimaan_Denda_Alda",
+    "SUBMISSION_MOBCOLL": rf"C:\EL\Project\Standarized\Submission\Outlook\Perfomance_Kunjungan_Mobcoll",
+    "SUBMISSION_MOBCOLL_LOR": rf"C:\EL\Project\Standarized\Submission\Outlook\Perfomance_Kunjungan_Mobcoll_LoR",
+    "SUBMISSION_PERFORMANCE": rf"C:\EL\Project\Standarized\Submission\Outlook\Performance_AR_Remedial_Asset",
+    "SUBMISSION_RECOVERY_WO": rf"C:\EL\Project\Standarized\Submission\Outlook\Performance_Recovery_WO",
+    "SUBMISSION_STOPSELL": rf"C:\EL\Project\Standarized\Submission\Outlook\Perfomance_Kunjungan_StopSell",
     # SOURCE
-    "WORKSOURCE_ALDA": rf"D:\EL\REPORT_ALDA\REPORT-DENDA-ALDA.xlsx",
-    "WORKSOURCE_AR_TOD": rf"D:\EL\REPORT_AR_TOD\REPORT-TOD-SOURCE.xlsx",
-    "WORKSOURCE_BUCKET_CURRENT": rf"D:\EL\REPORT_BUCKET_CURRENT\Performance-Bucket-Source.xlsx",
-    "WORKSOURCE_BUCKET_OD": rf"D:\EL\REPORT_BUCKET_OD\Performance-Bucket-OD.xlsx",
-    "WORKSOURCE_CASH_IN": rf"D:\EL\REPORT_CASH_IN\CASH-IN-SOURCE.xlsx",
-    "WORKSOURCE_DASHBOARD_CWO": rf"D:\EL\SOURCE_DASHBOARD_CWO\REPORT_DASHBOARD_CWO.xlsx",
-    "WORKSOURCE_RECOVERY_WO": rf"D:\EL\REPORT_RECOVERY_WO\REPORT_PERFORMANCE_RECOVERY.xlsx",
-    "WORKSOURCE_DENDA_AKTIF": rf"D:\EL\REPORT_DENDA_AKTIF\REPORT_DENDA_AKTIF.xlsx",
-    "WORKSOURCE_FLOWRATE": rf"D:\EL\REPORT_FLOWRATE\UPDATE-FR-SOURCE.xlsx",
-    "WORKSOURCE_MOBCOLL_LOR": rf"D:\EL\SOURCE_MOBCOLL_LOR\REPORT_LOR_SOURCE.xlsx",
-    "WORKSOURCE_MOBCOLL": rf"D:\EL\REPORT-MONITORING-MOBCOLL\Summary-Monitoring-Mobcoll.xlsx",
-    "WORKSOURCE_PERFORMANCE": rf"D:\EL\REPORT_SUMMARY_PERFORMANCE\SUMMARY-REPORT-PERFORMANCE.xlsx",
-    "WORKSOURCE_STOPSELL": rf"D:\EL\SOURCE_STOPSELL\REPORT_DASHBOARD_STOPSELL.xlsx",
-    "SUBMISSION_LOR_FILENAME": rf"D:\EL\SOURCE_MOBCOLL_LOR\WHATSAPP\SUBMISSION\Mobcoll_LoR_Whatsapp.xlsx",
+    "WORKSOURCE_ALDA": rf"C:\EL\Source\Summary_Penerimaan_Denda_Alda.xlsx",
+    "WORKSOURCE_AR_TOD": rf"C:\EL\Source\Summary_Performance_AR_TOD.xlsx",
+    "WORKSOURCE_BUCKET_CURRENT": rf"C:\EL\Source\Summary_Performance_Bucket_Current.xlsx",
+    "WORKSOURCE_BUCKET_OD": rf"C:\EL\Source\Summary_Performance_Bucket_Overdue.xlsx",
+    "WORKSOURCE_CASH_IN": rf"C:\EL\Source\Summary_Penerimaan_CashIn.xlsx",
+    "WORKSOURCE_DASHBOARD_CWO": rf"C:\EL\Source\Summary_Performance_CWO_WO_Estimasi_WO.xlsx",
+    "WORKSOURCE_DENDA_AKTIF": rf"C:\EL\Source\Summary_Penerimaan_Denda_Aktif.xlsx",
+    "WORKSOURCE_MOBCOLL": rf"C:\EL\Source\Summary_Perfomance_Kunjungan_Mobcoll.xlsx",
+    "WORKSOURCE_MOBCOLL_LOR": rf"C:\EL\Source\Summary_Perfomance_Kunjungan_Mobcoll_LoR.xlsx",
+    "WORKSOURCE_PERFORMANCE": rf"C:\EL\Source\Summary_Performance_AR_Remedial_Asset.xlsx",
+    "WORKSOURCE_RECOVERY_WO": rf"C:\EL\Source\Summary_Performance_Recovery_WO.xlsx",
+    "WORKSOURCE_STOPSELL": rf"C:\EL\Source\Summary_Perfomance_Kunjungan_StopSell.xlsx",
 }
-
 
 # ─── CONTACT INFORMATION ──────────────────────────────────────────────────────
 CONTACT_INFO = {
